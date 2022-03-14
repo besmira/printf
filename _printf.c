@@ -30,7 +30,7 @@ char *convert_value(unsigned int num, int base)
 
 void _printf(char *format, ...)
 {
-	char *curr;
+	char *curr, *dec, *integer, *oct, *hex;
 	unsigned int i;
 	char *s;
 
@@ -57,27 +57,17 @@ void _printf(char *format, ...)
 				break;
 			case 'd':
 				i = va_arg(arg, int);
-				if (i < 0)
-				{
-					i = -i;
-					putchar('-');
-				}
-				char *dec = convert_value(i, 10);
+				dec = convert_value(i, 10);
 				write(1, dec, strlen(dec));
 				break;
 			case 'i':
 				i = va_arg(arg, int);
-				if (i < 0)
-				{
-					i = -i;
-					putchar('-');
-				}
-				char *integer = convert_value(i, 10);
+				integer = convert_value(i, 10);
 				write(1, integer, strlen(integer));
 				break;
 			case 'o':
 				i = va_arg(arg, unsigned int);
-				char *oct = convert_value(i, 8);
+				oct = convert_value(i, 8);
 				write(1, oct, strlen(oct));
 				break;
 			case 's':
@@ -86,7 +76,7 @@ void _printf(char *format, ...)
 				break;
 			case 'x':
 				i = va_arg(arg, unsigned int);
-				char *hex = convert_value(i, 8);
+				hex = convert_value(i, 8);
 				write(1, hex, strlen(hex));
 				break;
 		}
