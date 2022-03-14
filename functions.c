@@ -12,7 +12,7 @@ int checkArg(const char *str)
 
 	for (i = 0; str[i] != '\0'; i++)
 	{
-		if (str[i] == '%')
+		if (str[i] == '%' && str[i + 1] != '%')
 			j++;
 	}
 	if (j == 0)
@@ -53,7 +53,6 @@ int advPutchar(const char *form, char *str1, int j)
 		{
 			write(1, "%", 1);
 			j = j + 2;
-			break;
 		}
 	}
 	return (j);

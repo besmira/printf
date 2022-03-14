@@ -7,9 +7,9 @@
  */
 int main(void)
 {
-	char *test = "test";
-	char *test2 = "readable";
+	char *test = "sdfsdfsdf";
+	char test2 = 'c';
 
-	_printf("testing c %s \n", test);
+	_printf("testing c %% %s, %c \n", test, test2);
 	return (0);
 }
