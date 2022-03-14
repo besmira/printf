@@ -1,6 +1,6 @@
 #include "main.h"
 #include <unistd.h>
-#include <string.h>
+
 /**
  * checkArg - check if string needs arguments
  * @str: string
@@ -22,6 +22,20 @@ int checkArg(const char *str)
 }
 
 /**
+ * _putchar - print a string
+ * @str: string
+ */
+void _putchar(char *str)
+{
+	int i;
+
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		write(1, &str[i], 1);
+	}
+}
+
+/**
  * advPutchar - advanced putchar
  * @form: string
  * @str1: arguments
@@ -39,7 +53,7 @@ int advPutchar(const char *form, char *str1, int j)
 		}
 		else if (form[j] == '%' && form[j + 1] == 's')
 		{
-			write(1, str1, (strlen(str1)));
+			_putchar(str1);
 			j = j + 2;
 			break;
 		}
