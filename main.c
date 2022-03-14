@@ -8,7 +8,7 @@
 
 int main(void)
 {
-	_printf("This is a test test %d %c %% %s", -235, 't', "Another fuking test");
+	_printf("This is a test test %d %c %% %s", 235, 't', "Another fuking test");
 
 	return (0);
 }

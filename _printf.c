@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <string.h>
 
 /**
  * convert_value - an integer to another base
@@ -90,5 +91,5 @@ void _printf(char *format, ...)
 				break;
 		}
 	}
-	va_and(arg);
+	va_end(arg);
 }
