@@ -2,6 +2,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include "main.h"
+#include <string.h>
 
 /**
  * _printf - mere imitation of printf
@@ -14,6 +15,8 @@ int _printf(const char *form, ...)
 	va_list ap;
 	char *str1;
 
+	str1 = (char *) malloc(sizeof(char *) * strlen(form));
+
 	l = checkArg(form);
 
 
@@ -24,7 +27,7 @@ int _printf(const char *form, ...)
 		{
 			if(form[j] != '%')
 			{
-				write(1, &form[j], 1);
+				str1[j] = form[j];
 				j++;
 			}
 			else if (form[j] == '%' && form[j + 1] == '%')
@@ -41,7 +44,12 @@ int _printf(const char *form, ...)
 			}
 		}
 	}
-	va_end(ap);
 
+	for (i = 0; str1[i] != '\0'; i++)
+	{
+		write(1, &str1[i], 1);
+	}
+	va_end(ap);
+	free(str1);
 	return (0);
 }
