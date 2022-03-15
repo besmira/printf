@@ -1,5 +1,6 @@
 #include "main.h"
 #include <unistd.h>
+#include <stdarg.h>
 
 /**
  * checkArg - check if string needs arguments
@@ -44,30 +45,15 @@ void _putchar(char *str)
  */
 int advPutchar(const char *form, char *str1, int j)
 {
-	while (form[j] != '\0')
+	if (form[j] == '%' && form[j + 1] == 's')
 	{
-		if (form[j] != '%')
-		{
-			write(1, &form[j], 1);
-			j++;
-		}
-		else if (form[j] == '%' && form[j + 1] == 's')
-		{
-			_putchar(str1);
-			j = j + 2;
-			break;
-		}
-		else if (form[j] == '%' && form[j + 1] == 'c')
-		{
-			write(1, &str1, 1);
-			j = j + 2;
-			break;
-		}
-		else if (form[j] == '%' && form[j + 1] == '%')
-		{
-			write(1, "%", 1);
-			j = j + 2;
-		}
+		_putchar(str1);
+		j = j + 2;
+	}
+	else if (form[j] == '%' && form[j + 1] == 'c')
+	{
+		write(1, &str1, 1);
+		j = j + 2;
 	}
 	return (j);
 }

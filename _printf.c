@@ -20,8 +20,26 @@ int _printf(const char *form, ...)
 	va_start(ap, form);
 	for (i = 0; i <= l; i++)
 	{
-		str1 = va_arg(ap, char*);
-		j = advPutchar(form, str1, j);
+		while(form[j] != '\0')
+		{
+			if(form[j] != '%')
+			{
+				write(1, &form[j], 1);
+				j++;
+			}
+			else if (form[j] == '%' && form[j + 1] == '%')
+			{
+				write(1, "%", 1);
+				j = j + 2;
+				break;
+			}
+			else if (form[j] == '%' && (form[j + 1] == 's' || form[j + 1] == 'c'))
+			{
+				
+				j = advPutchar(form, va_arg(ap, char *), j);
+				break;
+			}
+		}
 	}
 	va_end(ap);
 
