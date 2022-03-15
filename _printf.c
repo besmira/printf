@@ -21,6 +21,7 @@ int _printf(const char *form, ...)
 
 
 	va_start(ap, form);
+	/*
 	for (i = 0; i <= l; i++)
 	{
 		while(form[j] != '\0')
@@ -44,10 +45,11 @@ int _printf(const char *form, ...)
 			}
 		}
 	}
+	*/
 
-	for (i = 0; str1[i] != '\0'; i++)
+	for (i = 0; form[i] != '\0'; i++)
 	{
-		write(1, &str1[i], 1);
+		write(1, &form[i], 1);
 	}
 	va_end(ap);
 	free(str1);
