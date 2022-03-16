@@ -77,6 +77,6 @@ int pi(va_list arg)
 			i++;
 		}
 	}
-
+	_putchar(last + '0');
 	return (i);
 }
