@@ -43,7 +43,7 @@ int ps(va_list arg)
  */
 int pi(va_list arg)
 {
-	int num, n, dig, last, exp, i = 0;
+	int num, n, dig, last, exp, i = 1;
 
 	n = va_arg(arg, int);
 	exp = 1;
