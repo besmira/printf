@@ -2,7 +2,6 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include "main.h"
-#include <string.h>
 
 /**
  * _printf - mere imitation of printf
