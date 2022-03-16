@@ -11,47 +11,48 @@
  */
 int _printf(const char *form, ...)
 {
-	int i, j = 0, l = 0;
-	va_list ap;
-	char *str1;
+	va_list	arguments;
+	const char *p;
+	int num = 0;
 
-	str1 = (char *) malloc(sizeof(char *) * strlen(form));
+	if (form == NULL)
+		return (-1);
 
-	l = checkArg(form);
+	va_start(arguments, form);
 
-
-	va_start(ap, form);
-	/*
-	for (i = 0; i <= l; i++)
+	for (p = form; *p; p++)
 	{
-		while(form[j] != '\0')
+		if (*p == '%' && *p + 1 == '%')
 		{
-			if(form[j] != '%')
+			_putchar(*p), num++;
+			continue;
+		}
+		else if (*p == '%' && *p + 1 != '%')
+		{
+			switch (*++p)
 			{
-				str1[j] = form[j];
-				j++;
-			}
-			else if (form[j] == '%' && form[j + 1] == '%')
-			{
-				write(1, "%", 1);
-				j = j + 2;
-				break;
-			}
-			else if (form[j] == '%' && (form[j + 1] == 's' || form[j + 1] == 'c'))
-			{
-				
-				j = advPutchar(form, va_arg(ap, char *), j);
-				break;
+				case 's':
+					num += ps(arguments);
+					break;
+				case 'c':
+					num += pc(arguments);
+					break;
+				case '%':
+					_putchar('%'), num++;
+					break;
+				case '\0':
+					return (-1);
+				case 'i':
+				case 'd':
+					num += pi(arguments);
+					break;
+				default:
+					_putchar('%'), _putchar(*p), num += 2;
 			}
 		}
+		else
+			_putchar(*p), num++;
 	}
-	*/
-
-	for (i = 0; form[i] != '\0'; i++)
-	{
-		write(1, &form[i], 1);
-	}
-	va_end(ap);
-	free(str1);
-	return (0);
+	va_end(arguments);
+	return (num);
 }

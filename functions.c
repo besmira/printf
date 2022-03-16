@@ -3,57 +3,80 @@
 #include <stdarg.h>
 
 /**
- * checkArg - check if string needs arguments
- * @str: string
- * Return: number of arguments
+ * pc - putchar characters
+ * @arg: list
+ * Return: 1
  */
-int checkArg(const char *str)
+int pc(va_list arg)
 {
-	int i, j = 0;
-
-	for (i = 0; str[i] != '\0'; i++)
-	{
-		if (str[i] == '%' && str[i + 1] != '%')
-			j++;
-	}
-	if (j == 0)
-		j++;
-
-	return (j);
+	_putchar(va_arg(arg, int));
+	return (1);
 }
 
+
 /**
- * _putchar - print a string
- * @str: string
+ * ps - putchar strings
+ * @arg: argument
+ * Return: i
  */
-void _putchar(char *str)
+int ps(va_list arg)
 {
+	char *str;
 	int i;
 
-	for (i = 0; str[i] != '\0'; i++)
+	str = va_arg(arg, char *);
+	if (str == NULL)
+		str = "(nil)";
+	i = 0;
+	while (str[i] != '\0')
 	{
-		write(1, &str[i], 1);
+		_putchar(str[i]);
+		i++;
 	}
+	return (i);
 }
 
 /**
- * advPutchar - advanced putchar
- * @form: string
- * @str1: arguments
- * @j: index
- * Return: index
+ * pi - print integer
+ * @arg: argument
+ * Return: i
  */
-int advPutchar(const char *form, char *str1, int j)
+int pi(va_list arg)
 {
-	if (form[j] == '%' && form[j + 1] == 's')
+	int num, n, dig, last, exp, i;
+
+	n = va_arg(arg, int);
+	exp = 1;
+	last = n % 10;
+	n = n / 10;
+	num = n;
+
+	if (last < 0)
 	{
-		_putchar(str1);
-		j = j + 2;
+		_putchar('-');
+		last = -last;
+		num = -num;
+		n = -n;
+		i++;
 	}
-	else if (form[j] == '%' && form[j + 1] == 'c')
+
+	if (num > 0)
 	{
-		write(1, &str1, 1);
-		j = j + 2;
+		while (num / 10 != 0)
+		{
+			exp = exp * 10;
+			num = num / 10;
+		}
+		num = n;
+		while (exp > 0)
+		{
+			dig = num / exp;
+			_putchar(dig + '0');
+			num = num - (dig * exp);
+			exp = exp / 10;
+			i++;
+		}
 	}
-	return (j);
+
+	return (i);
 }
